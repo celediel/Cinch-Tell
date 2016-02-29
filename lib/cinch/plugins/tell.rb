@@ -34,10 +34,6 @@ module Cinch
         @db = purge_ancients(@db)
       end
 
-      def header(title)
-        puts '=' * 5 + " #{title} " + '=' * 5
-      end
-
       def read_tells(nick)
         tells = @db[:tells]
         ret = tells.where(to_user: nick).all
