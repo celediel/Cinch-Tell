@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary  = 'Cinch plugin to leave memos for people on IRC'
   s.email    = 'lilian.jonsdottir@gmail.com'
   s.homepage = 'https://github.com/lilyseki/Cinch-Tell'
-  s.authors  = ['Lily Jónsdottír']
+  s.authors  = ['Lily Jónsdóttir']
   s.license  = 'MIT'
 
   s.description = <<-EOF
