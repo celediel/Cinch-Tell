@@ -47,7 +47,6 @@ module Cinch
 
       def parse_tells(tell)
         # ready tell for telling
-        to_nick = tell[:to_user]
         from_nick = tell[:from_user]
         msg = tell[:message]
         msg_when = tell[:time]
