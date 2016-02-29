@@ -100,7 +100,7 @@ module Cinch
             User(i[:to_user]).send(parse_tells(i))
           end
         end
-        @db[:tells].where(to_user: m.user.nick).delete
+        @db[:tells].where(to_user: m.user.nick.downcase).delete
       end
 
       match(/tell(?: (.+))?/, method: :irc_tell)
