@@ -22,9 +22,9 @@ purged from the database.
 EOF
 
   dependencies = [
-    [:runtime, 'sequel', '~> 0'],
-    [:runtime, 'time_diff', '~> 0'],
-    [:runtime, 'facets', '~> 0']
+    [:runtime, 'sequel', '~> 4.31'],
+    [:runtime, 'time_diff', '~> 0.3'],
+    [:runtime, 'facets', '~> 3.0']
   ]
 
   s.files         = Dir['**/*']
