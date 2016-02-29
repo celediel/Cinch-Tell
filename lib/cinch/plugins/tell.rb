@@ -15,7 +15,6 @@ module Cinch
     # Leaving messages and things
     class Tell
       include Cinch::Plugin
-      # set :prefix, /^\./
       listen_to :join, method: :check_tells
       listen_to :nick, method: :check_tells
 
