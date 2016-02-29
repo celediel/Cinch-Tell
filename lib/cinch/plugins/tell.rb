@@ -18,10 +18,14 @@ module Cinch
       listen_to :join, method: :check_tells
       listen_to :nick, method: :check_tells
 
+      # I don't actually know if this does anything with cinch
+      # but I keep anything that's not an actual command private
       private
 
       def initialize(*args)
         super
+        # TODO: make database name based on bot nick
+        # or configuration variable
         @db = Sequel.sqlite('riria.db')
         # Create the tables if they don't exist
         @db.create_table? :tells do
@@ -35,6 +39,7 @@ module Cinch
       end
 
       def read_tells(nick)
+        # read the database and return array of tells for specified nick
         tells = @db[:tells]
         ret = tells.where(to_user: nick).all
         return [] if ret.empty?
@@ -60,17 +65,18 @@ module Cinch
         ago_str << 'ago.' unless ago_str.empty?
         ago_str = 'an undetermined amount of time ago.' if ago_str.empty?
         output << ago_str
-        # feels odd without "return output" but I guess that's Ruby
       end
 
       def purge_ancients(db)
         # purge any messages older than x date
+        # TODO: make this a config variable
         purge_date = Time.now.shift(-6, :months)
         db[:tells].where('time < ?', purge_date.to_f).delete
         db
       end
 
       def add_tell(nick, msg, from)
+        # add a tell to the database
         t = Time.now.to_f
         @db[:tells].insert(to_user: nick, from_user: from, message: msg, time: t)
       end
@@ -78,6 +84,11 @@ module Cinch
       public
 
       def check_tells(m)
+        # Listen to join and nick changes, and check if user has any waiting
+        # memos in the database. Might listen to all messages and check if
+        # speaking user has any waiting memos, for people who go away
+        # but don't change their nick, but I'm not sure if I want to query
+        # the database at every IRC message in every channel
         tells = read_tells(m.user.nick.downcase)
         return if tells.empty?
         r = parse_tells(tells.first)
