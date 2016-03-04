@@ -52,12 +52,14 @@ module Cinch
         msg = tell[:message]
         msg_when = tell[:time]
         timediff = Time.diff(Time.at(msg_when), Time.now)
-        output = "#{from_nick} wanted to tell you '#{msg}' about "
+        puts "when: #{msg_when}, now: #{Time.now}, timediff: #{timediff}"
+        output = "#{from_nick} wanted to tell you '#{msg}', "
         # lots of unless, could use timediff[:diff] but it's ugly
         ago_str = ''
         ago_str = "#{timediff[:year]} years, " unless timediff[:year].zero?
         ago_str << "#{timediff[:month]} months, " unless timediff[:month].zero?
         ago_str << "#{timediff[:week]} weeks, " unless timediff[:week].zero?
+        ago_str << "#{timediff[:day]} days, " unless timediff[:day].zero?
         ago_str << "#{timediff[:hour]} hours, " unless timediff[:hour].zero?
         ago_str << "#{timediff[:minute]} minutes, " unless timediff[:minute].zero?
         ago_str << 'and ' unless ago_str.empty?
