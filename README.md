@@ -6,6 +6,7 @@ the channel
 Usage
 -----
 
+[![Gem Version](https://badge.fury.io/rb/Cinch-Tell.svg)](https://badge.fury.io/rb/Cinch-Tell)
 Install the gem with *gem install Cinch-Tell*, and
 add it to your bot like so:
 
